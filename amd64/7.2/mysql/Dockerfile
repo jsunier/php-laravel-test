@@ -1,6 +1,9 @@
-FROM php:7.1-cli
+FROM php:7.2-cli
 
-MAINTAINER Joël Sunier <jsunier@stogon.io>
+LABEL maintainer="Joël Sunier <jsunier@stogon.io>" \
+    php.version="7.2" \
+    php.pdo_connector="MySQL" \
+    os.architecture="amd64"
 
 RUN apt-get update && \
     apt-get install -yqq git curl libmcrypt-dev libjpeg-dev zlib1g-dev libpng-dev libfreetype6-dev libbz2-dev libxml2-dev libpq-dev && \
@@ -8,3 +11,11 @@ RUN apt-get update && \
     apt-get clean
 
 RUN curl --silent --show-error https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+WORKDIR /app
+
+VOLUME [ "/app" ]
+
+EXPOSE 8000
+
+CMD [ "php", "/app/artisan", "serve", "--host", "0.0.0.0" ]
