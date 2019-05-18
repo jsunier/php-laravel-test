@@ -18,15 +18,23 @@ Every images include the latest version of [composer](https://getcomposer.org).
 
 List of PHP extensions installed:
 
-* mbstring
-* zip
-* iconv
-* opcache
-* bcmath
-* pdo
-* imagick
+| Extension / PHP version | 7.1 | 7.2 | 7.3 |
+|-------------------------|:---:|:---:|:---:|
+| `mbstring`              |  ✅  |  ✅  |  ✅  |
+| `zip`                   |  ✅  |  ✅  |  ✅  |
+| `iconv`                 |  ✅  |  ✅  |  ✅  |
+| `opcache`               |  ✅  |  ✅  |  ✅  |
+| `bcmath`                |  ✅  |  ✅  |  ✅  |
+| `pdo_mysql`             |  ✅  |  ✅  |  ✅  |
+| `pdo`                   |  ✅  |  ✅  |  ✅  |
+| `imagick`               |  ✅  |  ✅  |  ✅  |
+| `gd`                    |  ❌  |  ❌  |  ❌  |
+| `mcrypt`                |  ❌  |  ❌  |  ❌  |
+| `oci8`                  |  ❌  |  ❌  |  ❌  |
+| `postgresql`            |  ❌  |  ❌  |  ❌  |
+| `redis`                 |  ❌  |  ❌  |  ❌  |
 
-### Architectures available
+## Architectures available
 
 Images are compiled for these architectures:
 
@@ -37,29 +45,35 @@ Images are compiled for these architectures:
 
 ### MySQL/MariaDB
 
-#### amd64
-
-Use `jsunier/php-laravel-test:7.1-mysql` or `jsunier/php-laravel-test:7.1-mariadb`
-
-#### arm32v7
-
-Use `jsunier/php-laravel-test:7.1-arm32v7-mysql` or `jsunier/php-laravel-test:7.1-arm32v7-mariadb`
+* amd64 : `jsunier/php-laravel-test:7.1-mysql` or `jsunier/php-laravel-test:7.1-mariadb`
+* arm32v7 : `jsunier/php-laravel-test:7.1-mysql-arm32v7` or `jsunier/php-laravel-test:7.1-mariadb-arm32v7`
 
 ## PHP7.2
 
-#### amd64
+* amd64 : `jsunier/php-laravel-test:7.2-mysql` or `jsunier/php-laravel-test:7.2-mariadb`
+* arm32v7 : `jsunier/php-laravel-test:7.2-mysql-arm32v7` or `jsunier/php-laravel-test:7.2-mariadb-arm32v7`
+*
+## PHP7.3
 
-Use `jsunier/php-laravel-test:7.2-mysql` or `jsunier/php-laravel-test:7.2-mariadb`
+* amd64 : `jsunier/php-laravel-test:7.3-mysql` or `jsunier/php-laravel-test:7.3-mariadb`
+* arm32v7 : `jsunier/php-laravel-test:7.3-mysql-arm32v7` or `jsunier/php-laravel-test:7.3-mariadb-arm32v7`
 
-#### arm32v7
+# Default configurations
 
-Use `jsunier/php-laravel-test:7.2-arm32v7-mysql` or `jsunier/php-laravel-test:7.2-arm32v7-mariadb`
+Default value in Dockerfile's directives:
+
+| Directive | Value                                                     |
+|-----------|-----------------------------------------------------------|
+| `WORKDIR` | `/app`                                                    |
+| `VOLUME`  | `[ "/app" ]`                                              |
+| `EXPOSE`  | `8000`                                                    |
+| `CMD`     | `[ "php", "/app/artisan", "serve", "--host", "0.0.0.0" ]` |
 
 # Build
 
 To build these images, just go into the folder of you choice and run `docker build . -t <your-image-name:your-tag>`.
 
-Example: 
+Example:
 ```
 # cd amd64/php7.1/mysql
 # docker build . -t my-awesome-phpunit-image
