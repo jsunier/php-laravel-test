@@ -1,6 +1,6 @@
 # jsunier/php-laravel-test
 
-Docker image to run PHPUnit with Laravel on PHP7.1/PHP7.2.
+Docker image to run PHPUnit with Laravel on PHP 7.1/7.2/7.3.
 
 The image is published on the [Docker Hub](https://hub.docker.com) at this address : https://hub.docker.com/r/jsunier/php-laravel-test.
 
