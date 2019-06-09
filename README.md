@@ -52,7 +52,7 @@ Images are compiled for these architectures:
 
 * amd64 : `jsunier/php-laravel-test:7.2-mysql` or `jsunier/php-laravel-test:7.2-mariadb`
 * arm32v7 : `jsunier/php-laravel-test:7.2-mysql-arm32v7` or `jsunier/php-laravel-test:7.2-mariadb-arm32v7`
-*
+
 ## PHP7.3
 
 * amd64 : `jsunier/php-laravel-test:7.3-mysql` or `jsunier/php-laravel-test:7.3-mariadb`
@@ -70,6 +70,30 @@ Default value in Dockerfile's directives:
 | `CMD`     | `[ "php", "/app/artisan", "serve", "--host", "0.0.0.0" ]` |
 
 # Build
+
+## All at once
+
+There is a `Makefile` available to simplify the creation of theses images.
+
+You can change the values inside this file to set your custom repository, folders, tags, etc.
+
+> You need to have `make` installed (`sudo apt install make`)
+
+### Build AMD (x64)
+
+```
+$ make build-amd
+$ make push-amd
+```
+
+### Build ARM (arm32v7)
+
+```
+$ make build-arm
+$ make push-arm
+```
+
+## Specific container
 
 To build these images, just go into the folder of you choice and run `docker build . -t <your-image-name:your-tag>`.
 
