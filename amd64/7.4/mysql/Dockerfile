@@ -1,16 +1,18 @@
-FROM arm32v7/php:7.3-cli
+FROM php:7.4-cli
 
 LABEL maintainer="Joël Sunier <jsunier@stogon.io>" \
-    php.version="7.3" \
+    php.version="7.4" \
     php.pdo_connector="MySQL" \
-    os.architecture="arm32v7"
+    os.architecture="amd64"
 
 RUN apt-get update && \
     apt-get install -yqq unzip git curl libzip-dev libmcrypt-dev libjpeg-dev zlib1g-dev libpng-dev libfreetype6-dev libbz2-dev libxml2-dev libpq-dev && \
-    docker-php-ext-install mbstring pdo_mysql zip iconv opcache gd && \
+    docker-php-ext-install pdo_mysql zip iconv opcache && \
+	docker-php-ext-configure gd --with-freetype --with-jpeg && \
+    docker-php-ext-install gd && \
     apt-get clean
 
-COPY --from=arm32v7/composer /usr/bin/composer /usr/bin/composer
+COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 WORKDIR /app
 

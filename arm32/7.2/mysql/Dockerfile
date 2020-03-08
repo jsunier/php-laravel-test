@@ -10,12 +10,22 @@ RUN apt-get update && \
     docker-php-ext-install mbstring pdo_mysql zip iconv opcache gd && \
     apt-get clean
 
-RUN curl --silent --show-error https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+COPY --from=arm32v7/composer /usr/bin/composer /usr/bin/composer
 
 WORKDIR /app
 
 VOLUME [ "/app" ]
 
+# Create a "laravel" user
+RUN groupadd --gid 1000 laravel \
+  && useradd --uid 1000 --gid laravel --shell /bin/bash --create-home laravel
+
+# Fix permissions issues
+RUN chmod -R a+wrx /app
+
 EXPOSE 8000
+
+USER laravel
+RUN composer global require --no-interaction --no-progress hirak/prestissimo:0.3.10
 
 CMD [ "php", "/app/artisan", "serve", "--host", "0.0.0.0" ]

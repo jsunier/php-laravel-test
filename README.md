@@ -1,6 +1,6 @@
 # jsunier/php-laravel-test
 
-Docker image to run PHPUnit with Laravel on PHP 7.1/7.2/7.3.
+Docker image to run PHPUnit with Laravel on PHP 7.1/7.2/7.3/7.4.
 
 The image is published on the [Docker Hub](https://hub.docker.com) at this address : https://hub.docker.com/r/jsunier/php-laravel-test.
 
@@ -18,21 +18,23 @@ Every images include the latest version of [composer](https://getcomposer.org).
 
 List of PHP extensions installed:
 
-| Extension / PHP version | 7.1 | 7.2 | 7.3 |
-|-------------------------|:---:|:---:|:---:|
-| `mbstring`              |  ✅  |  ✅  |  ✅  |
-| `zip`                   |  ✅  |  ✅  |  ✅  |
-| `iconv`                 |  ✅  |  ✅  |  ✅  |
-| `opcache`               |  ✅  |  ✅  |  ✅  |
-| `bcmath`                |  ✅  |  ✅  |  ✅  |
-| `pdo_mysql`             |  ✅  |  ✅  |  ✅  |
-| `pdo`                   |  ✅  |  ✅  |  ✅  |
-| `imagick`               |  ✅  |  ✅  |  ✅  |
-| `gd`                    |  ❌  |  ❌  |  ❌  |
-| `mcrypt`                |  ❌  |  ❌  |  ❌  |
-| `oci8`                  |  ❌  |  ❌  |  ❌  |
-| `postgresql`            |  ❌  |  ❌  |  ❌  |
-| `redis`                 |  ❌  |  ❌  |  ❌  |
+| Extension / PHP version | 7.1 | 7.2 | 7.3 | 7.4 |
+|-------------------------|:---:|:---:|:---:|:---:|
+| `mbstring`              |  ✅  |  ✅  |  ✅  | ✅ |
+| `zip`                   |  ✅  |  ✅  |  ✅  | ✅ |
+| `iconv`                 |  ✅  |  ✅  |  ✅  | ✅ |
+| `opcache`               |  ✅  |  ✅  |  ✅  | ✅ |
+| `bcmath`                |  ✅  |  ✅  |  ✅  | ✅ |
+| `pdo_mysql`             |  ✅  |  ✅  |  ✅  | ✅ |
+| `pdo`                   |  ✅  |  ✅  |  ✅  | ✅ |
+| `imagick`               |  ✅  |  ✅  |  ✅  | ✅ |
+| `gd`                    |  ✅  |  ✅  |  ✅  | ✅ |
+| `mcrypt`                |  ❌  |  ❌  |  ❌  | ❌ |
+| `oci8`                  |  ❌  |  ❌  |  ❌  | ❌ |
+| `postgresql`            |  ❌  |  ❌  |  ❌  | ❌ |
+| `redis`                 |  ❌  |  ❌  |  ❌  | ❌ |
+
+Additionally, there is [hirak/prestissimo](https://packagist.org/packages/hirak/prestissimo) installed in all images to speed up `composer install/update`.
 
 ## Architectures available
 
@@ -58,6 +60,11 @@ Images are compiled for these architectures:
 * amd64 : `jsunier/php-laravel-test:7.3-mysql` or `jsunier/php-laravel-test:7.3-mariadb`
 * arm32v7 : `jsunier/php-laravel-test:7.3-mysql-arm32v7` or `jsunier/php-laravel-test:7.3-mariadb-arm32v7`
 
+## PHP7.4
+
+* amd64 : `jsunier/php-laravel-test:7.4-mysql` or `jsunier/php-laravel-test:7.4-mariadb` or `jsunier/php-laravel-test:latest-mysql` or `jsunier/php-laravel-test:latest-mariadb`
+* arm32v7 : `jsunier/php-laravel-test:7.4-mysql-arm32v7` or `jsunier/php-laravel-test:7.4-mariadb-arm32v7` or `jsunier/php-laravel-test:latest-mysql-arm32v7` or `jsunier/php-laravel-test:latest-mariadb-arm32v7`
+
 # Default configurations
 
 Default value in Dockerfile's directives:
@@ -68,6 +75,8 @@ Default value in Dockerfile's directives:
 | `VOLUME`  | `[ "/app" ]`                                              |
 | `EXPOSE`  | `8000`                                                    |
 | `CMD`     | `[ "php", "/app/artisan", "serve", "--host", "0.0.0.0" ]` |
+
+The default user is `laravel`.
 
 # Build
 
@@ -99,6 +108,6 @@ To build these images, just go into the folder of you choice and run `docker bui
 
 Example:
 ```
-# cd amd64/php7.1/mysql
+# cd amd64/php7.4/mysql
 # docker build . -t my-awesome-phpunit-image
 ```
